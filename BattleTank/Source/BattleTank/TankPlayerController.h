@@ -3,10 +3,12 @@
 #pragma once
 
 
-#include"GameFramework/Controller.h"
+
 #include "Tank.h"
-#include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
+#include "Engine/World.h"
+#include"GameFramework/Controller.h"
+#include "CoreMinimal.h"
 #include "TankPlayerController.generated.h"
 
 /**
@@ -23,6 +25,18 @@ public:
 	void BeginPlay() override;
 	virtual void Tick(float DeltaTime) override;
 	ATank* GetControlledTank() const;
-
 	void AimTowardsCrosshair();
+	bool GetSightRayHitLocation(FVector &HitLocation) const;
+
+	bool GetLookDirection(FVector &LookDirection) const;
+
+	bool GetLookVectorHitLocation(FVector LookDirection, FVector &HitLocation) const;
+	
+private:
+
+	UPROPERTY(EditAnywhere)
+	float CrossHairXLocation = 0.5;
+	UPROPERTY(EditAnywhere)
+	float CrossHairYLocation = 0.3333333;
+	float LineTraceRange = 1000000;
 };
